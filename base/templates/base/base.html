@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="h-100" lang="en">
+    <head>
+        {% if title %}
+            <title>Vault - {{ title }}</title>
+        {% else %}
+            <title>Vault</title>
+        {% endif %}
+        
+        <!-- Metadata -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}">
+
+        <!-- Font Awesome -->
+        <script src="https://kit.fontawesome.com/c66b56e08d.js" crossorigin="anonymous"></script>
+        
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    </head>
+
+    <body class="d-flex flex-column h-100 bg-dark text-light">
+        <header class="site-header">
+            <nav class="navbar navbar-expand-sm navbar-dark bg-black">
+                <div class="container-fluid">
+                    <div class="navbar-nav me-auto">
+                        <a class="navbar-brand" href="{% url 'base:home' %}">Vault</a>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            {% if user.is_authenticated %}
+                                {% if user.is_superuser or user.is_staff %}
+                                    <a class="nav-link" href="{% url 'users:list' %}">Manage Accounts</a>
+                                {% endif %}
+                                <a class="nav-link" href="{% url 'keys:list' %}">My Keys</a>
+                                <a class="nav-link" href="{% url 'users:logout' %}">Logout</a>
+                            {% else %}
+                                <a class="nav-link" href="{% url 'users:register' %}">Register</a>
+                                <a class="nav-link" href="{% url 'users:login' %}">Login</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="flex-shrink-0 mb-4">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            <div class="container mt-4">
+                {% block content %}{% endblock content %}
+            </div>
+        </main>
+        
+        <footer class="footer mt-auto bg-black p-1 text-center">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <h6>Vault Inc.</h6>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    </body>
+</html>

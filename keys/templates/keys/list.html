@@ -1,0 +1,13 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+    <h1>List of Keys</h1>
+    {% include "base/filter_form.html" %}
+    <a class="btn btn-primary" href="{% url 'keys:create' %}">Add New Key</a>
+    <ul>
+        {% for key in keys %}
+            <li><a href="{% url 'keys:detail' key.id %}">{{ key.key}}</a></li>
+        {% endfor %}
+    </ul>
+    {% include "base/paginator.html" %}
+{% endblock content %}

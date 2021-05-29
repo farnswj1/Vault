@@ -1,0 +1,15 @@
+{% load crispy_forms_tags %}
+
+<div class="row mb-5">
+    <div class="col-4">
+        <form class="form-horizontal" method="GET">
+            <div class="form-group">
+                {{ filter.form|crispy }}
+            </div>
+        
+            <div class="mt-4">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </form>
+    </div>
+</div>

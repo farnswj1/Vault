@@ -1,0 +1,12 @@
+.bg-black {
+    background-color: black;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}

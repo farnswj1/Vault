@@ -1,0 +1,15 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    <ul>
+        <li>{{ user_.username }}</li>
+        <li>{{ user_.full_name }}</li>
+        <li>{{ user_.email }}</li>
+        <li>{{ user_.is_staff|yesno:"Yes,No" }}</li>
+        <li>{{ user_.is_superuser|yesno:"Yes,No" }}</li>
+    </ul>
+    <a class="btn btn-info" href="{% url 'users:list' %}">Back</a>
+    <a class="btn btn-primary" href="{% url 'users:update' user_.id %}">Update</a>
+    <a class="btn btn-danger" href="{% url 'users:delete' user_.id %}">Delete</a>
+{% endblock content %}
